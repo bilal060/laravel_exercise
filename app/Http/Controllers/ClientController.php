@@ -24,7 +24,7 @@ use App\Client;class ClientController extends Controller
     public function create()
     {
         if (!Auth::user()->admin) {
-            Session::flash('info', 'You do not permit that make it ');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
             return redirect()->back();
         } else {
             return view('admin.clients.create');
@@ -75,7 +75,7 @@ use App\Client;class ClientController extends Controller
     {
         if (!Auth::user()->admin) {
             \LogActivity::addToLog('Non admin user is not allowed to access this url.');
-            Session::flash('info', 'You do not permit that make it ');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
             return redirect()->back();
         } else {
             $clients = Client::find($id);
@@ -118,7 +118,7 @@ use App\Client;class ClientController extends Controller
     public function destroy($id)
     {
         if (!Auth::user()->admin) {
-            Session::flash('info', 'You do not permit that make it ');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
             return redirect()->back();
         } else {
             $client = Client::find($id);

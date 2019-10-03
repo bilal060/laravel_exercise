@@ -19,8 +19,8 @@ class admin
     {
 
       if (!Auth::user()->admin) {
-         
-       Session::flash('info', 'You do not permit that make it ');
+
+       Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
 
 
       return redirect()->back();

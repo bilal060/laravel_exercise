@@ -27,8 +27,8 @@ class ProductsController extends Controller
     {
 
         if (!Auth::user()->admin) {
-            \LogActivity::addToLog('You do not permit that make it ');
-            Session::flash('info', 'You do not permit that make it ');
+            \LogActivity::addToLog('You are not allwed to perform this action. Please contact to admin');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
             return redirect()->back();
         }
         else {
@@ -89,7 +89,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         if (!Auth::user()->admin) {
-            Session::flash('info', 'You do not permit that make it ');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
 
             return redirect()->back();
         } else {
@@ -138,7 +138,7 @@ class ProductsController extends Controller
         if (!Auth::user()->admin) {
             \LogActivity::addToLog('You do not permit that make it');
 
-            Session::flash('info', 'You do not permit that make it ');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
             return redirect()->back();
         } else {
             $products = Product::find($id);
@@ -160,7 +160,7 @@ class ProductsController extends Controller
     {
         if (!Auth::user()->admin) {
             \LogActivity::addToLog('You do not permit that make it');
-            Session::flash('info', 'You do not permit that make it ');
+            Session::flash('error', 'You are not allwed to perform this action. Please contact to admin');
             return redirect()->back();
         } else {
             $products = Product::withTrashed()->where('id', $id)->first();

@@ -21,7 +21,10 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="phone" id="phone" class="form-control input-lg" placeholder="Cell Number" value="{{ $client->phone }}" tabindex="2">
+                                    <input name="phone" id="phone" class="form-control input-lg"
+                                           placeholder="Cell Number"
+                                           type="tel" pattern="^\d{4}-\d{3}-\d{4}$" value="{{ $client->phone }}" tabindex="2">
+                                    format: xxxx-xxx-xxxx
                                 </div>
                             </div>
                         </div>

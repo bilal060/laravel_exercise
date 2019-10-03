@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Session;
 use App\User;
 use App\Profile;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -127,11 +128,22 @@ class UsersController extends Controller
     }
     public function not_admin($id)
     {
+        $currentUser = Auth::user();
+
         $user = User::find($id);
-        $user->admin = 0;
-        $user->save();
-        \LogActivity::addToLog('Change status of admin to user.');
-        Session::flash('success', 'You make admin successfully!');
-        return redirect()->back();
+
+        if($currentUser->id != $id) {
+            $user->admin = 0;
+            $user->save();
+            \LogActivity::addToLog('Change status of admin to user.');
+            Session::flash('success', 'You make admin successfully!');
+            return redirect()->back();
+        }
+        else {
+            Session::flash('error', 'You cannot remove yourself from admin to normal user!');
+            return redirect()->back();
+
+        }
+
     }
 }
